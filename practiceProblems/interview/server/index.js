@@ -1,13 +1,11 @@
 const express = require('express');
 const app = express();
-const aws = require('aws-sdk')
+const aws = require('aws-sdk');
 const path = require('path');
-const config = require('../config.js')
-//const morgan = require('morgan');
+const config = require('../config.js');
 const multer = require('multer');
-const multerS3 = require('multer-s3')
+const multerS3 = require('multer-s3');
 const port = 3000
-const storage = multer.memoryStorage()
 const s3 = new aws.S3({
   bucketName: config.AWS_BUCKET_NAME,
   secretAccessKey: config.AWS_SECRET_ACCESS_KEY,
@@ -28,15 +26,8 @@ const upload = multer({
   })
 })
 
-
-app.listen(port, () => {
-  console.log(`server listening on: ${port}`);
-})
-
 app.use(express.json());
 app.use('/', express.static(path.join(__dirname, '../dist')));
-//app.use(morgan("dev"));
-
 
 app.post('/image', upload.single('image'),(req, res, next) => {
   next()
@@ -46,5 +37,6 @@ app.post('/image', upload.single('image'),(req, res, next) => {
   res.send({url: url})
 })
 
-// AWS_BUCKET_NAME="phils-image-upload-bucket"
-// AWS_BUCKET_REGION="us-east-1"
+app.listen(port, () => {
+  console.log(`server listening on: ${port}`);
+})
