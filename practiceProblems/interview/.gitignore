@@ -1,0 +1,6 @@
+node_modules
+dist/bundle.js
+package-lock.json
+config.js
+package-lock.json
+BucketPolicy.txt
