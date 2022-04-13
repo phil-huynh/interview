@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 
-
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -16,8 +15,7 @@ class App extends React.Component {
   }
 
   handleFile(e) {
-    var file = e.target.files[0]
-    console.log(file)
+    var file = e.target.files[0];
     var formData = new FormData();
     formData.append("image", file)
     this.setState({
@@ -41,7 +39,6 @@ class App extends React.Component {
     })
     .then((res) =>{
       var url = res.data.url;
-      console.log(res.data.url)
       var list = this.state.imageList;
       list.push(url)
       this.setState({
@@ -54,7 +51,7 @@ class App extends React.Component {
   }
 
   render() {
-    var list = this.state.imageList
+    var list = this.state.imageList;
     return (
       <div>
         <form onSubmit={this.submit}enctype="multipart/form-data">

@@ -33,7 +33,6 @@ app.post('/image', upload.single('image'),(req, res, next) => {
   next()
 }, (req, res) => {
   var url = req.file.location
-  console.log(url)
   res.send({url: url})
 })
 
